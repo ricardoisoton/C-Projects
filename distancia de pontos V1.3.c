@@ -4,6 +4,10 @@
 #include <time.h>
 #define N 50
 
+//Desenvolvido por Ricardo Isoton
+//Data 12/03/2020			Versão 1.3
+
+
 void MostraM(char M[N][N]) {
 int i, j;
 
@@ -30,7 +34,7 @@ int main() {
 char M[N][N];
 int k, i, j;
 float d=0, x=0, y=0;
-float ax=0, ay=0, bx=0, by=0, cx=0, cy=0, dx=0, dy=0, ex = 0, ey = 0, fx=0, fy=0;
+float ax=0, ay=0, bx=0, by=0, cx=0, cy=0, dx=0, dy=0, ex = 0, ey = 0, fx=0, fy=0, gx=0, gy=0;
 float incx=0, incy=0;
 srand (time(NULL));
 
@@ -41,11 +45,12 @@ srand (time(NULL));
 	}
 //Coordenadas dos pontos
 ax = N-1; ay = N/2;
-bx = 0; by = 0;
+bx = rand() % N; by = rand() % N;
 cx = rand() % N; cy = rand() % N;
 dx = rand() % N; dy = rand() % N;
 ex = rand() % N; ey = rand() % N;
 fx = rand() % N; fy = rand() % N;
+gx = rand() % N; gy = rand() % N;
 
 {//Calculo da distancia entre os pontos A-B
 d = distancia(bx, ax, by, ay);
@@ -123,12 +128,29 @@ y = ay;
 		y+=incy;
 	}
 }
+{//Calculo da distancia entre os pontos A-G
+d = distancia(gx, ax, gy, ay);
+incx = eixos(gx,ax)/d;
+if(gx<ax){incx*=-1;}
+incy = eixos(gy, ay)/d;
+if(gy<ay){incy*=-1;}
+
+x = ax;
+y = ay;
+	for(k=0; k<d; k++){
+		M[(int) x][(int)y] = '*';
+		x+=incx;
+		y+=incy;
+	}
+}
+
 	M[(int)ax][(int)ay] = 'A';
 	M[(int)bx][(int)by] = 'B';
 	M[(int)cx][(int)cy] = 'C';
 	M[(int)dx][(int)dy] = 'D';
 	M[(int)ex][(int)ey] = 'E';
 	M[(int)fx][(int)fy] = 'F';
+	M[(int)gx][(int)gy] = 'G';
 	
 	MostraM(M);
 	
