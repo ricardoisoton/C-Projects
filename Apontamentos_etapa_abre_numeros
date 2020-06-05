@@ -1,0 +1,4 @@
+Ao analisar a resposta proposta pelos colegas que entregaram anteriormente
+e os apontamentos levantados pelo professor, revisamos a solução proposta
+e diminuindo as linhas e implementando mais condicionais if da linha 26 a 29,
+sendo assim não mais necessario ter linhas para verificar as diagonais.
