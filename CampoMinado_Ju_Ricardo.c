@@ -178,5 +178,7 @@ int main()
     int cont = AbreArea( Tabuleiro, TabVisual, 0, 0);
   
     MostraTabuleiro(Tabuleiro, TabVisual);
+    
+    printf("\nCelulas abertas: %d\n", cont);
 
 }
