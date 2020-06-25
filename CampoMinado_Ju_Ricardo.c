@@ -195,11 +195,11 @@ int main()
 	}
 	MontaTabuleiro(Tabuleiro);
 	int pontos = 0;
-	printf("Campo Minado:\n");
+	printf("Bem vindo ao desafio:\n");
 	MostraTabuleiro(Tabuleiro, TabVisual);
 	while (true) {
 		int op = 0;
-		printf("Para jogar, digite:\n");
+		printf("Quer mesmo continuar?\n");
 		printf("1 - Jogada normal, 2 - Inserir/Remover Bandeira, 3 - Sair\n");
 		scanf_s("%d", &op);
 		// Valida a opção de jogada digitada pelo usuário
