@@ -1,8 +1,7 @@
-/*
-// Campo Minado modo texto
-// Professor Filipo - filipomor.com
-// versão 0.1 Alpha
-*/
+/* Campo Minado
+// Juliana Costa e Ricardo Isoton
+// versão 4.0 Alpha */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
@@ -15,33 +14,29 @@
 #define _FECHADA_  -1
 #define _VAZIA_    -2
 #define _BANDEIRA_ -5
-int AbreArea(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_Width_], int X /*coluna */, int Y /* linha */, bool celulaAntVazia)
-{
+
+int AbreArea(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_Width_], int X /*coluna */, int Y /* linha */, bool celulaAntVazia){
 	int cont = 0;
 	// teste teste
 	//printf("TabVisual[%d][%d]: %d  Tabuleiro[%d][%d]: %d \n", Y, X, TabVisual[Y][X], Y, X, Tabuleiro[Y][X]);
 	// verifica se posição selecionada pode ser aberta.
-	if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] == _VAZIA_)
-	{
+	if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] == _VAZIA_){
 		TabVisual[Y][X] = _ABERTA_;
 		cont++;
 		if (Y > 0)              if (TabVisual[Y - 1][X] == _FECHADA_) cont += AbreArea(Tabuleiro, TabVisual, X, Y - 1, true); // conta acima
 		if (Y < (_Height_ - 1)) if (TabVisual[Y + 1][X] == _FECHADA_) cont += AbreArea(Tabuleiro, TabVisual, X, Y + 1, true); // conta abaixo
 		if (X < (_Width_ - 1))  if (TabVisual[Y][X + 1] == _FECHADA_) cont += AbreArea(Tabuleiro, TabVisual, X + 1, Y, true); // conta a direita
 		if (X > 0)              if (TabVisual[Y][X - 1] == _FECHADA_) cont += AbreArea(Tabuleiro, TabVisual, X - 1, Y, true); // conta a direita
-	}
-	else if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] > 0 && Tabuleiro[Y][X] <= 8 && celulaAntVazia)
+	}else if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] > 0 && Tabuleiro[Y][X] <= 8 && celulaAntVazia)
 	{
 		// se a célula selecionada possui uma contagem, esta fechada e foi chamada
 		// a partir de uma célula vazia e aberta, entao a abre.
 		TabVisual[Y][X] = _ABERTA_;
 		cont++;
-	}
-	else if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] > 0 && Tabuleiro[Y][X] <= 8 && !celulaAntVazia) {
+	}else if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] > 0 && Tabuleiro[Y][X] <= 8 && !celulaAntVazia) {
 		TabVisual[Y][X] = _ABERTA_;
 		cont++;
-	}
-	else if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] == _BOMBA_) {
+	}else if (TabVisual[Y][X] == _FECHADA_ && Tabuleiro[Y][X] == _BOMBA_) {
 		TabVisual[Y][X] = _ABERTA_;
 		cont = _BOMBA_;
 		// BOMBA, finaliza o jogo
@@ -59,22 +54,17 @@ void MostraTabuleiro(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_
 	}
 	printf("\n");
 	printf("%c", 201);
-	for (i = 0; i < _Width_; i++)
-	{
+	for (i = 0; i < _Width_; i++){
 		printf("%c%c%c%c%c", 205, 205, 205, 205, 205);
 	}
 	printf("%c\n", 187);
-	for (L = 0; L < _Height_; L++)
-	{
+	for (L = 0; L < _Height_; L++){
 		printf("%c", 186);
-		for (C = 0; C < _Width_; C++)
-		{
+		for (C = 0; C < _Width_; C++){
 			// celula esta aberta?
 			
-			if (TabVisual[L][C] == _ABERTA_)
-			{
-				switch (Tabuleiro[L][C])
-				{
+			if (TabVisual[L][C] == _ABERTA_){
+				switch (Tabuleiro[L][C]){
 				case _BOMBA_: printf("  %c  ", 225); break;
 				case 1:
 				case 2:
@@ -88,14 +78,11 @@ void MostraTabuleiro(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_
 				//case _BANDEIRA_: printf("  %d  ", 15); break;
 				default: printf("  .  "); break;
 				}
-			}
-			else
-			{
+			}else {
 				if (Tabuleiro[L][C] == _BANDEIRA_) {
 					printf("  %c  ", 4);
 					printf("  %c  ", 63);
-				}
-				else {
+				}else {
 					printf("  %c  ", 254);
 				}
 			}
@@ -104,49 +91,38 @@ void MostraTabuleiro(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_
 	}
 	// parte inferior da moldura
 	printf("%c", 200);
-	for (i = 0; i < _Width_; i++)
-	{
+	for (i = 0; i < _Width_; i++){
 		printf("%c%c%c%c%c", 205, 205, 205, 205, 205);
 	}
 	printf("%c\n", 188);
 }
-void MontaTabuleiro(int Tabuleiro[_Height_][_Width_])
-{
+void MontaTabuleiro(int Tabuleiro[_Height_][_Width_]){
 	int L, C;
 	int qtBombasAlocadas = 0;
 	bool achei = false;
 	// "limpar" a matriz
-	for (L = 0; L < _Height_; L++)
-	{
-		for (C = 0; C < _Width_; C++)
-		{
+	for (L = 0; L < _Height_; L++){
+		for (C = 0; C < _Width_; C++){
 			Tabuleiro[L][C] = _VAZIA_;
 		}
 	}
 	// sorteia as posições das bombas
-	while (qtBombasAlocadas < _QtBombas_)
-	{
+	while (qtBombasAlocadas < _QtBombas_){
 		achei = false;
 		int X = rand() % (_Width_ - 1); // sorteia uma posição X (coluna)
 		int Y = rand() % (_Height_ - 1); // sorteia uma posição Y (linha)
-		if (Tabuleiro[Y][X] == _BOMBA_)
-		{
+		if (Tabuleiro[Y][X] == _BOMBA_){
 			achei = true;
-		}
-		if (!achei)
-		{
+		}if (!achei){
 			Tabuleiro[Y][X] = _BOMBA_;
 			qtBombasAlocadas++;
 		}
 	}
 	// contagem de bombas para cada célula
 	int contBombas = 0;
-	for (L = 0; L < _Height_; L++)
-	{
-		for (C = 0; C < _Width_; C++)
-		{
-			if (Tabuleiro[L][C] != _BOMBA_)
-			{
+	for (L = 0; L < _Height_; L++){
+		for (C = 0; C < _Width_; C++){
+			if (Tabuleiro[L][C] != _BOMBA_){
 				contBombas = 0;
 				if (L > 0)              if (Tabuleiro[L - 1][C] == _BOMBA_) contBombas++; // conta acima
 				if (L < (_Height_ - 1)) if (Tabuleiro[L + 1][C] == _BOMBA_) contBombas++; // conta abaixo
@@ -169,16 +145,14 @@ void Bandeira(int Tabuleiro[_Height_][_Width_], int TabAuxiliar[_Height_][_Width
 		TabAuxiliar[l][c] = Tabuleiro[l][c];
 		Tabuleiro[l][c] = _BANDEIRA_;
 		printf("Bandeira adicionada !\n");
-	}
-	else {
+	}else {
 		Tabuleiro[l][c] = TabAuxiliar[l][c];
 		TabAuxiliar[l][c] = _BANDEIRA_;
 		printf("Bandeira removida !\n");
 	}
 }
 
-int main()
-{
+int main() {
 
 	int Tabuleiro[_Height_][_Width_];
 	int TabVisual[_Height_][_Width_];
@@ -186,7 +160,7 @@ int main()
 	// _FECHADA_ : -1 : celula fechada
 	// _ABERTA_  :  0 : celula aberta
 	int L, C;
-	//srand(time(NULL)); // inicia a semente do randomizador
+	srand(time(NULL)); // inicia a semente do randomizador
 	// teste: abre tabuleiro
 	for (L = 0; L < _Height_; L++) {
 		for (C = 0; C < _Width_; C++) {
