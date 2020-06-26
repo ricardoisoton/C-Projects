@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#define _QtBombas_  8
+#define _QtBombas_  1
 #define _Height_   10 
 #define _Width_    10
 #define _BOMBA_    -8
@@ -55,7 +55,7 @@ void MostraTabuleiro(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_
 
     // parte superior da moldura
     for (i = 0; i < _Width_; i++) {
-		printf("   C%d", f++);
+		printf("  C%d ", f++);
 	}
 	printf("\n");
 	printf("%c", 201);
@@ -206,6 +206,9 @@ int main()
 		if (op < 1 || op >3) {
 			printf("Opcao invalida !\n");
 			continue;
+		}if(op==3) {
+				printf("Medo muito sentir eu em voce");
+				break;
 		}
 		int l = 0, c = 0;
 		printf("Digite a linha desejada:\n");
@@ -223,29 +226,17 @@ int main()
 				if (celulas == _BOMBA_) {
 					printf("Campo Minado:\n");
 					MostraTabuleiro(Tabuleiro, TabVisual);
-					printf("Final de jogo ! Voce abriu uma bomba, sua pontuacao: 0\n");
+					printf("Voce perdeu! Treine mais para a proxima vez, sua pontuacao: 0\n");
 					break;
 				}
 				
 				pontos += celulas;
 				
-			} else if(op==2) {
-				if (Tabuleiro[l - 1][c - 1] != _BANDEIRA_) {
-					TabAuxiliar[l - 1][c - 1] = Tabuleiro[l - 1][c - 1];
-					Tabuleiro[l - 1][c - 1] = _BANDEIRA_;
-					printf("Bandeira adicionada !\n");
-				} else {
-					Tabuleiro[l - 1][c - 1] = TabAuxiliar[l - 1][c - 1];
-					TabAuxiliar[l - 1][c - 1] = _BANDEIRA_;
-					printf("Bandeira removida !\n");
-				}
+			}if(op==2) {
+			
+				Bandeira(Tabuleiro, TabAuxiliar, l - 1, c - 1);				
 				
-				Bandeira(Tabuleiro, TabAuxiliar, l - 1, c - 1);
-				
-			} else{
-				printf("Medo muito sentir eu em você");
-				break;
-			}
+			} 
 			printf("Campo Minado:\n");
 			MostraTabuleiro(Tabuleiro, TabVisual);
 			printf("Pontuacao atual: %d\n", pontos);
