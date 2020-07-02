@@ -162,10 +162,13 @@ int main() {
 	int TabVisual[_Height_][_Width_];
 	int TabAuxiliar[_Height_][_Width_];
 	int L, C;
-	srand(time(NULL)); // inicia a semente do randomizador
+	
+	// inicia a semente do randomizador
+	srand(time(NULL));
+	
 	for (L = 0; L < _Height_; L++) {
 		for (C = 0; C < _Width_; C++) {
-			TabVisual[L][C] = _FECHADA_; // todas as células estao fechadas!
+			TabVisual[L][C] = _FECHADA_;
 		}
 	}
 	MontaTabuleiro(Tabuleiro);
@@ -180,6 +183,7 @@ int main() {
 		printf("Quer mesmo continuar?\n");
 		printf("1 - Jogada normal, 2 - Inserir/Remover Bandeira, 3 - Sair\n");
 		scanf_s("%d", &op);
+		
 		// Valida a opção de jogada digitada pelo usuário
 		if (op < 1 || op >3) {
 			printf("Opcao invalida !\n");
@@ -232,7 +236,6 @@ int main() {
 	        for (j = 0; j < _Width_; j++){
 	            if(Tabuleiro[i][j] == _BANDEIRA_){
 	            	contbandeira++;
-	            	//printf("%d", cont);
 				}
 	        }
 	    }	
