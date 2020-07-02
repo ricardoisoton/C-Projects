@@ -74,13 +74,11 @@ void MostraTabuleiro(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_
 				case 6:
 				case 7:
 				case 8:  printf("  %d  ", Tabuleiro[L][C]); break;
-					//case _BANDEIRA_: printf("  %d  ", 15); break;
-				//case _BANDEIRA_: printf("  %d  ", 15); break;
+				case _BANDEIRA_: printf("  %d  ", 15); break;
 				default: printf("  .  "); break;
 				}
 			}else {
 				if (Tabuleiro[L][C] == _BANDEIRA_) {
-					printf("  %c  ", 4);
 					printf("  %c  ", 63);
 				}else {
 					printf("  %c  ", 254);
