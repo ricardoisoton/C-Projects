@@ -6,16 +6,16 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <time.h>
-#define _QtBombas_  1
-#define _Height_   10 
-#define _Width_    10
+#define _QtBombas_  10
+#define _Height_    10
+#define _Width_     10
 #define _BOMBA_    -8
 #define _ABERTA_    0
 #define _FECHADA_  -1
 #define _VAZIA_    -2
 #define _BANDEIRA_ -5
 
-int AbreArea(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_Width_], int X /*coluna */, int Y /* linha */, bool celulaAntVazia){
+int AbreArea(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_Width_], int X /*coluna */, int Y /* linha */, bool celulaAntVazia) {
 	int cont = 0;
 	// teste teste
 	//printf("TabVisual[%d][%d]: %d  Tabuleiro[%d][%d]: %d \n", Y, X, TabVisual[Y][X], Y, X, Tabuleiro[Y][X]);
@@ -51,12 +51,12 @@ void MostraTabuleiro(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_
 	int c = 1;
 	printf(" ");
 	for (i = 0; i < _Width_; i++){
-		if (c < 10){
+		if (c < 10)
 			printf("  C%d ", c);
-		}else{
+		else
 			printf(" C%d ", c);
-		c += 1;
-		}
+			c += 1;
+		
 	}
 	printf("\n");
 	printf("%c", 201);
@@ -102,7 +102,7 @@ void MostraTabuleiro(int Tabuleiro[_Height_][_Width_], int TabVisual[_Height_][_
 	}
 	printf("%c\n", 188);
 }
-void MontaTabuleiro(int Tabuleiro[_Height_][_Width_]){
+void MontaTabuleiro(int Tabuleiro[_Height_][_Width_]) {
 	int L, C;
 	int qtBombasAlocadas = 0;
 	bool achei = false;
@@ -219,7 +219,7 @@ int main() {
 			} 
 			printf("Campo Minado:\n");
 			MostraTabuleiro(Tabuleiro, TabVisual);
-			printf("Pontuacao atual: %d\n", pontos);
+			printf("Pontuacao atual: %d\n", pontos*10);
 		}
 
 		int i, j, contbomba=0, contbandeira=0;
@@ -250,12 +250,14 @@ int main() {
 				TabVisual[L][C] = _ABERTA_;
 				}
 			}
+			system("cls");
 			MostraTabuleiro(Tabuleiro, TabVisual);
 			printf("O poder da forca sentir eu em voce, parabens");
 			printf("\nVoce venceu");
+			printf("\nPontuacao total: %d\n", pontos*10);
 			break;
 		}else{
-				printf("\nPrecisa marcar todas as bandeiras");
+				printf("\nPrecisa marcar todas as bandeiras ");
 		}
 	}
 }
